@@ -9,7 +9,7 @@ public class Rail
 
     public Rail()
     {
-        type = (Type)Random.Range(0, 5);
+        type = (Type)Random.Range(0, 6);
     }
 
     public static Vector2Int[] RailDirections(Type type)
@@ -20,11 +20,11 @@ public class Rail
         }
         else if (type == Type.EW)
         {
-            return new Vector2Int[] { new Vector2Int(1, 0), new Vector2Int(-1, 1) };
+            return new Vector2Int[] { new Vector2Int(1, 0), new Vector2Int(-1, 0) };
         }
         else if (type == Type.NE)
         {
-            return new Vector2Int[] { new Vector2Int(0, 1), new Vector2Int(-1, 0) };
+            return new Vector2Int[] { new Vector2Int(0, 1), new Vector2Int(1, 0) };
         }
         else if (type == Type.NW)
         {

@@ -293,7 +293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   railQueue: {fileID: 90506691}
-  prefab_railIcon: {fileID: 7221948430506131463, guid: b5fdf1de34cd27144b868b693cb8c481,
+  prefab_railIcon: {fileID: 6380359844681462345, guid: e3826618f1b5af84da64145ad16575e9,
     type: 3}
 --- !u!1 &443509915
 GameObject:
@@ -338,7 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a91081b16c975248ab2f2b5e22ec8af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: 25
+  size: 13
   homeTile: {fileID: 0}
   startTile: {fileID: 0}
   prefab_tile: {fileID: 5059767462534033461, guid: fcde2697175264841b38643d63ecfbdd,

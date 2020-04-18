@@ -27,7 +27,6 @@ public class Tile : MonoBehaviour
     {
         if(rail == null)
         {
-            Debug.Log("Place");
             builder.PlaceRail(this);
         }
     }
@@ -42,5 +41,15 @@ public class Tile : MonoBehaviour
         railModel.transform.localEulerAngles = new Vector3(0, 180, 0);
     }
 
+
+    private void OnMouseEnter()
+    {
+        
+    }
+
+    private void OnMouseExit()
+    {
+        
+    }
 
 }
