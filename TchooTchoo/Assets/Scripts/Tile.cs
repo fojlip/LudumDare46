@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
+    public GameObject frame;
     public Vector2Int coords;
     public Rail rail;
 
@@ -11,6 +12,7 @@ public class Tile : MonoBehaviour
     
     private void Start()
     {
+        frame.SetActive(false);
         builder = GameObject.Find("Builder").GetComponent<Builder>();
     }
 
@@ -44,12 +46,12 @@ public class Tile : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        
+        frame.SetActive(true);
     }
 
     private void OnMouseExit()
     {
-        
+        frame.SetActive(false);
     }
 
 }
