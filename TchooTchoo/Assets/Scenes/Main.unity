@@ -221,8 +221,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 25
+  startTile: {fileID: 0}
   prefab_tile: {fileID: 5059767462534033461, guid: fcde2697175264841b38643d63ecfbdd,
     type: 3}
+  builder: {fileID: 90506689}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,6 +428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b140a8589c2caa4408b0f168aec91854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grid: {fileID: 443509917}
 --- !u!4 &1153360817
 Transform:
   m_ObjectHideFlags: 0

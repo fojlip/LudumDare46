@@ -6,6 +6,8 @@ public class Grid : MonoBehaviour
 {
     public Tile[,] tiles;
     public int size;
+    public Tile startTile;
+    public Tile homeTile;
 
     public GameObject prefab_tile;
     public Builder builder;
@@ -13,6 +15,8 @@ public class Grid : MonoBehaviour
     void Awake()
     {
         CreateGrid();
+        homeTile = tiles[Mathf.RoundToInt((size - 1) / 2), 0];
+        startTile = tiles[Mathf.RoundToInt((size - 1) / 2), 1];
         PlaceStartRails();
     }
 
