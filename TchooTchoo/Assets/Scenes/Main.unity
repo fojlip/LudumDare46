@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d84ee5a47af51e04490f7a55b4464de8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  railQueue: {fileID: 0}
+  railQueue: {fileID: 90506691}
 --- !u!4 &90506690
 Transform:
   m_ObjectHideFlags: 0
