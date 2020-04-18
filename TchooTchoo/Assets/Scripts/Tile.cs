@@ -36,7 +36,11 @@ public class Tile : MonoBehaviour
     {
         this.rail = rail;
 
-        if(rail.type == Rail.Type.Straight)
+        if(rail.type == Rail.Type.NS)
+        {
+            GetComponent<Renderer>().material.color = Color.blue;
+        }
+        else if (rail.type == Rail.Type.EW)
         {
             GetComponent<Renderer>().material.color = Color.blue;
         }

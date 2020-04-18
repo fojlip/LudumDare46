@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Rail
 {
-    public enum Type { Straight, NE, NW, SW, SE };
+    public enum Type { NS, EW, NE, NW, SW, SE };
     public Type type;
 
     public Rail()

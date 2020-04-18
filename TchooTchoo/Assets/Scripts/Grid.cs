@@ -8,10 +8,12 @@ public class Grid : MonoBehaviour
     public int size;
 
     public GameObject prefab_tile;
+    public Builder builder;
 
     void Awake()
     {
         CreateGrid();
+        PlaceStartRails();
     }
 
     void CreateGrid()
@@ -27,6 +29,19 @@ public class Grid : MonoBehaviour
                 tile.Setup(new Vector2Int(x, y), null, 0.1f);
                 tiles[x, y] = tile;
             }
+        }
+    }
+
+    void PlaceStartRails()
+    {
+        Rail rail = new Rail()
+        {
+            type = Rail.Type.NS
+        };
+
+        for(int i = 0; i < 3; i++)
+        {
+            builder.PlaceRail(tiles[Mathf.RoundToInt((size - 1) / 2), i], rail);
         }
     }
 

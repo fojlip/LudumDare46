@@ -11,4 +11,9 @@ public class Builder : MonoBehaviour
         tile.PlaceRail(railQueue.queue.Dequeue());
     }
 
+    public void PlaceRail(Tile tile, Rail rail)
+    {
+        tile.PlaceRail(rail);
+    }
+
 }
