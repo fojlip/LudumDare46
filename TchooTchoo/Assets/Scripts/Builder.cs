@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class Builder : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public RailQueue railQueue;
+
+    public void PlaceRail(Tile tile)
     {
-        
+        tile.PlaceRail(railQueue.queue.Dequeue());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

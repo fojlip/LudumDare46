@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RailQueue : MonoBehaviour
 {
-    Queue<Rail> queue;
+    public Queue<Rail> queue;
 
     void Start()
     {

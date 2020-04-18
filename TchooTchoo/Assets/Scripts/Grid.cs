@@ -25,7 +25,6 @@ public class Grid : MonoBehaviour
                 GameObject tileObj = Instantiate(prefab_tile, transform);
                 Tile tile = tileObj.GetComponent<Tile>();
                 tile.Setup(new Vector2Int(x, y), null, 0.1f);
-
                 tiles[x, y] = tile;
             }
         }
