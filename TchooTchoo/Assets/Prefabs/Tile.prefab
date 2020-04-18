@@ -107,6 +107,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0bd1ee3b4ac9b64eae220b0618e15ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundModels:
+  - {fileID: -927199367670048503, guid: 7045cbc17e353a848afc4c09c7727c3e, type: 3}
   frame: {fileID: 608489529032029485}
   coords: {x: 0, y: 0}
 --- !u!1001 &8885645043959917604
