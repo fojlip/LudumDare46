@@ -36,34 +36,10 @@ public class Tile : MonoBehaviour
     {
         this.rail = rail;
 
-        if(rail.type == Rail.Type.NS)
-        {
-            GetComponent<Renderer>().material.color = Color.blue;
-        }
-        else if (rail.type == Rail.Type.EW)
-        {
-            GetComponent<Renderer>().material.color = Color.gray;
-        }
-        else if (rail.type == Rail.Type.NE)
-        {
-            GetComponent<Renderer>().material.color = Color.red;
-        }
-        else if (rail.type == Rail.Type.NW)
-        {
-            GetComponent<Renderer>().material.color = Color.green;
-        }
-        else if (rail.type == Rail.Type.SW)
-        {
-            GetComponent<Renderer>().material.color = Color.yellow;
-        }
-        else if (rail.type == Rail.Type.SE)
-        {
-            GetComponent<Renderer>().material.color = Color.cyan;
-        }
-        else
-        {
-            Debug.LogWarning("N/A rail type: " + rail.type.ToString());
-        }
+        GameObject railModel = Instantiate(Resources.Load("Rails/" + rail.type.ToString())) as GameObject;
+        railModel.transform.parent = transform;
+        railModel.transform.localPosition = Vector3.zero;
+        railModel.transform.localEulerAngles = new Vector3(0, 180, 0);
     }
 
 

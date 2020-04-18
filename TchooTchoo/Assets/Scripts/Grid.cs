@@ -9,7 +9,6 @@ public class Grid : MonoBehaviour
     public Tile homeTile;
     public Tile startTile;
 
-
     public GameObject prefab_tile;
     public Builder builder;
 

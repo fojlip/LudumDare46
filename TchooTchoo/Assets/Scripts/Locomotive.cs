@@ -25,7 +25,7 @@ public class Locomotive : MonoBehaviour
         {            
             Tile nextTile = FindNextTile();
 
-            if (CanMoveToTile(nextTile.coords - currentTile.coords, nextTile))
+            if (CanMoveToTile(currentTile.coords - nextTile.coords, nextTile))
             {
                 Tile temp = currentTile;
                 currentTile = nextTile;
@@ -48,11 +48,11 @@ public class Locomotive : MonoBehaviour
         Vector2Int[] currentRailDirections = Rail.RailDirections(currentTile.rail.type);
         Vector2Int outDirection = Vector2Int.zero;
 
-        /*
+        
         Debug.Log(inDirection + " " + currentTile.coords + " " + lastTile.coords);
         Debug.Log(currentRailDirections[0]);
         Debug.Log(currentRailDirections[1]);
-        */
+        
 
         if (Math.Parallell(new Vector3(currentRailDirections[0].x, 0, currentRailDirections[0].y), new Vector3(inDirection.x, 0, inDirection.y)))
         {
@@ -77,7 +77,10 @@ public class Locomotive : MonoBehaviour
     bool CanMoveToTile(Vector2Int moveDirection, Tile tile)
     {
         if (tile.rail == null)
+        {
+            Debug.Log("No rail on tile");
             return false;
+        }            
 
         Vector2Int[] railDirection = Rail.RailDirections(tile.rail.type);
         for(int i = 0; i < 2; i ++)
@@ -88,6 +91,7 @@ public class Locomotive : MonoBehaviour
             }
         }
 
+        Debug.Log("Wrong direction on rail " + moveDirection + " " + railDirection[0] + " " + railDirection[1]);
         return false;
     }
 
