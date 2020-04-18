@@ -6,8 +6,9 @@ public class Grid : MonoBehaviour
 {
     public Tile[,] tiles;
     public int size;
-    public Tile startTile;
     public Tile homeTile;
+    public Tile startTile;
+
 
     public GameObject prefab_tile;
     public Builder builder;
