@@ -6,7 +6,7 @@ public class RailQueue : MonoBehaviour
 {
     public Queue<Rail> queue;
 
-    void Start()
+    void Awake()
     {
         queue = new Queue<Rail>();
         
