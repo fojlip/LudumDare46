@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class RailQueue : MonoBehaviour
 {
-    // Start is called before the first frame update
+    Queue<Rail> queue;
+
     void Start()
     {
-       
+        queue = new Queue<Rail>();
+        
+        for (int i = 0; i < 250; i++)
+        {
+            Rail rail = new Rail();
+            queue.Enqueue(rail);
+        }
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

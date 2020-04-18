@@ -7,16 +7,9 @@ public class Rail
     public enum Type { Straight, NE, NW, SW, SE };
     public Type type;
 
-
-    // Start is called before the first frame update
-    void Start()
+    public Rail()
     {
-        
+        type = (Type)Random.Range(0, 5);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }

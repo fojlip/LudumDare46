@@ -17,4 +17,17 @@ public class Tile : MonoBehaviour
         this.transform.localScale = Vector3.one * size;
     }
 
+
+    private void OnMouseDown()
+    {
+        if(rail != null)
+        {
+
+
+
+        }
+        Debug.Log("Hej " + coords);
+    }
+
+
 }
