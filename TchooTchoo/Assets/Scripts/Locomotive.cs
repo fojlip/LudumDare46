@@ -22,13 +22,22 @@ public class Locomotive : MonoBehaviour
         timer += Time.deltaTime;
 
         if(timer > moveTime)
-        {
-            Tile temp = currentTile;
-            currentTile = FindNextTile();
-            lastTile = temp;
-            
-            transform.transform.position = currentTile.transform.position;
-            timer = 0;
+        {            
+            Tile nextTile = FindNextTile();
+
+            if (CanMoveToTile(nextTile.coords - currentTile.coords, nextTile))
+            {
+                Tile temp = currentTile;
+                currentTile = nextTile;
+                lastTile = temp;
+
+                transform.transform.position = currentTile.transform.position;
+                timer = 0;
+            }
+            else
+            {
+                //Game end
+            }
         }
     }
 
@@ -63,6 +72,24 @@ public class Locomotive : MonoBehaviour
         return nextTile;
     }
 
+
+
+    bool CanMoveToTile(Vector2Int moveDirection, Tile tile)
+    {
+        if (tile.rail == null)
+            return false;
+
+        Vector2Int[] railDirection = Rail.RailDirections(tile.rail.type);
+        for(int i = 0; i < 2; i ++)
+        {
+            if (Math.Parallell(new Vector3(railDirection[i].x, 0, railDirection[i].y), new Vector3(moveDirection.x, 0, moveDirection.y)))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
 
 

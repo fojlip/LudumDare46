@@ -42,7 +42,7 @@ public class Tile : MonoBehaviour
         }
         else if (rail.type == Rail.Type.EW)
         {
-            GetComponent<Renderer>().material.color = Color.blue;
+            GetComponent<Renderer>().material.color = Color.gray;
         }
         else if (rail.type == Rail.Type.NE)
         {
