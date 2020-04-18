@@ -15,7 +15,13 @@ public class VisualizeQueue : MonoBehaviour
 
     public void UpdateVisualization()
     {
-        for(int i = 7; i >= 0; i--)
+        foreach (Transform child in transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+
+
+        for (int i = 7; i >= 0; i--)
         {
             Rail rail = railQueue.queue.ElementAt(i);
 

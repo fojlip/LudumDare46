@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   railQueue: {fileID: 90506691}
+  visualizeQueue: {fileID: 413352448}
 --- !u!4 &90506690
 Transform:
   m_ObjectHideFlags: 0
