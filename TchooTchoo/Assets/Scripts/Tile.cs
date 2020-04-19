@@ -8,6 +8,7 @@ public class Tile : MonoBehaviour
     public GameObject frame;
     public Vector2Int coords;
     public Rail rail;
+    public bool obstacle;
 
     Builder builder;
     
@@ -17,10 +18,11 @@ public class Tile : MonoBehaviour
         builder = GameObject.Find("Builder").GetComponent<Builder>();
     }
 
-    public void Setup(Vector2Int coords, Rail rail, float size)
+    public void Setup(Vector2Int coords, Rail rail, float size, bool obstacle = false)
     {
         this.coords = coords;
         this.rail = rail;
+        this.obstacle = obstacle;
 
         this.transform.position = new Vector3(coords.x, 0, coords.y) + new Vector3(1,0,1) * size*5;
         this.transform.localScale = Vector3.one * size;
@@ -30,7 +32,7 @@ public class Tile : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(rail == null)
+        if(rail == null && !obstacle)
         {
             builder.PlaceRail(this);
         }
@@ -49,7 +51,8 @@ public class Tile : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        frame.SetActive(true);
+        if(!obstacle)
+            frame.SetActive(true);
     }
 
     private void OnMouseExit()
