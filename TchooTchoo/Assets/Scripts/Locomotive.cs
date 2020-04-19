@@ -4,6 +4,8 @@ using UnityEngine;
 public class Locomotive : MonoBehaviour
 {
     public Grid grid;
+    public IntVariable score;
+
     Tile lastTile;
     Tile currentTile;
 
@@ -11,6 +13,8 @@ public class Locomotive : MonoBehaviour
 
     void Start()
     {
+        score.RuntimeValue = 0;
+
         lastTile = grid.homeTile;
         currentTile = grid.startTile;
         Vector2Int inDirection = lastTile.coords - currentTile.coords;
@@ -33,6 +37,8 @@ public class Locomotive : MonoBehaviour
                 Tile temp = currentTile;
                 currentTile = nextTile;
                 lastTile = temp;
+
+                score.RuntimeValue++;
             }
             else
             {

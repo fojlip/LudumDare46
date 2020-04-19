@@ -49,10 +49,16 @@ public class Grid : MonoBehaviour
             type = Rail.Type.NS
         };
 
-        for(int i = 0; i < 3; i++)
+        builder.PlaceRail(tiles[Mathf.RoundToInt((size - 1) / 2), 0], rail);
+        builder.PlaceRail(tiles[Mathf.RoundToInt((size - 1) / 2), 1], rail);
+        builder.PlaceRail(tiles[Mathf.RoundToInt((size - 1) / 2), 2], rail);
+
+        /*
+        for (int i = 0; i < 3; i++)
         {
             builder.PlaceRail(tiles[Mathf.RoundToInt((size - 1) / 2), i], rail);
         }
+        */
     }
 
 
