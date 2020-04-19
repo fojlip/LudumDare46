@@ -7,38 +7,84 @@ public class Locomotive : MonoBehaviour
     public Grid grid;
     Tile lastTile;
     Tile currentTile;
-    float timer = 0;
-    float moveTime = 5;
+
+    readonly float moveTime = 5;
 
     void Start()
     {
         lastTile = grid.homeTile;
         currentTile = grid.startTile;
         transform.transform.position = currentTile.transform.position;
+
+        StartCoroutine(Loop());
     }
 
-    void Update()
+    IEnumerator Loop()
     {
-        timer += Time.deltaTime;
-
-        if(timer > moveTime)
-        {            
+        yield return new WaitForSeconds(5.0f);
+        
+        while (true)
+        {
+            yield return StartCoroutine(MoveOverTile());
+            
             Tile nextTile = FindNextTile();
-
             if (CanMoveToTile(currentTile.coords - nextTile.coords, nextTile))
             {
                 Tile temp = currentTile;
                 currentTile = nextTile;
                 lastTile = temp;
-
-                transform.transform.position = currentTile.transform.position;
-                timer = 0;
             }
             else
             {
                 //Game end
+                gameObject.SetActive(false);
             }
         }
+    }
+
+
+    IEnumerator MoveOverTile()
+    {
+        Vector2Int inDirection = lastTile.coords - currentTile.coords;
+        Vector2Int[] currentRailDirections = Rail.RailDirections(currentTile.rail.type);
+        Vector2Int outDirection = Vector2Int.zero;
+
+        if (Math.Parallell(new Vector3(currentRailDirections[0].x, 0, currentRailDirections[0].y), new Vector3(inDirection.x, 0, inDirection.y)))
+        {
+            outDirection = currentRailDirections[1];
+        }
+        else if (Math.Parallell(new Vector3(currentRailDirections[1].x, 0, currentRailDirections[1].y), new Vector3(inDirection.x, 0, inDirection.y)))
+        {
+            outDirection = currentRailDirections[0];
+        }
+        else
+        {
+            Debug.LogWarning("!!!! ");
+        }
+
+        float f = 0; 
+        while(f < moveTime)
+        {
+            if(Math.ParallellOrOpposite(new Vector3(inDirection.x,0,inDirection.y), new Vector3(outDirection.x, 0, outDirection.y)))
+            {
+                transform.position = Vector3.Lerp(currentTile.transform.position + new Vector3(inDirection.x, 0, inDirection.y) * 0.5f,
+                    currentTile.transform.position + new Vector3(outDirection.x, 0, outDirection.y) * 0.5f, f / moveTime);
+            }
+            else
+            {
+                int sign = Mathf.RoundToInt(Mathf.Sign(Vector2.SignedAngle(inDirection, outDirection)));
+
+                Vector3 point = currentTile.transform.position + new Vector3(inDirection.x, 0, inDirection.y) * 0.5f +
+                    new Vector3(outDirection.x, 0, outDirection.y) * 0.5f;
+                transform.RotateAround(point, Vector3.up, 90 * 0.01f/3 * sign);
+            }
+
+            f += Time.deltaTime;
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        transform.position = currentTile.transform.position + new Vector3(outDirection.x, 0, outDirection.y) * 0.5f; //new Vector3(outDirection.x, 0, outDirection.y) * 0.5f;
+        transform.rotation = Quaternion.LookRotation(new Vector3(outDirection.x, 0, outDirection.y), Vector3.up);
     }
 
     Tile FindNextTile()
@@ -46,13 +92,7 @@ public class Locomotive : MonoBehaviour
         Tile nextTile = null;
         Vector2Int inDirection = lastTile.coords - currentTile.coords;
         Vector2Int[] currentRailDirections = Rail.RailDirections(currentTile.rail.type);
-        Vector2Int outDirection = Vector2Int.zero;
-
-        
-        Debug.Log(inDirection + " " + currentTile.coords + " " + lastTile.coords);
-        Debug.Log(currentRailDirections[0]);
-        Debug.Log(currentRailDirections[1]);
-        
+        Vector2Int outDirection = Vector2Int.zero;    
 
         if (Math.Parallell(new Vector3(currentRailDirections[0].x, 0, currentRailDirections[0].y), new Vector3(inDirection.x, 0, inDirection.y)))
         {
@@ -71,8 +111,6 @@ public class Locomotive : MonoBehaviour
         nextTile = grid.tiles[nextTileCoords.x, nextTileCoords.y];
         return nextTile;
     }
-
-
 
     bool CanMoveToTile(Vector2Int moveDirection, Tile tile)
     {
