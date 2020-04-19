@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Locomotive : MonoBehaviour
@@ -14,7 +13,8 @@ public class Locomotive : MonoBehaviour
     {
         lastTile = grid.homeTile;
         currentTile = grid.startTile;
-        transform.transform.position = currentTile.transform.position;
+        Vector2Int inDirection = lastTile.coords - currentTile.coords;
+        transform.transform.position = currentTile.transform.position + new Vector3(inDirection.x, 0, inDirection.y) * 0.5f;
 
         StartCoroutine(Loop());
     }
@@ -42,7 +42,6 @@ public class Locomotive : MonoBehaviour
         }
     }
 
-
     IEnumerator MoveOverTile()
     {
         Vector2Int inDirection = lastTile.coords - currentTile.coords;
@@ -59,7 +58,7 @@ public class Locomotive : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("!!!! ");
+            Debug.LogWarning("!!!!");
         }
 
         float f = 0; 
