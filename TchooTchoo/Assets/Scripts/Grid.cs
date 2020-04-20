@@ -48,17 +48,11 @@ public class Grid : MonoBehaviour
         {
             type = Rail.Type.NS
         };
-
-        builder.PlaceRail(tiles[Mathf.RoundToInt((size - 1) / 2), 0], rail);
-        builder.PlaceRail(tiles[Mathf.RoundToInt((size - 1) / 2), 1], rail);
-        builder.PlaceRail(tiles[Mathf.RoundToInt((size - 1) / 2), 2], rail);
-
-        /*
+        
         for (int i = 0; i < 3; i++)
         {
             builder.PlaceRail(tiles[Mathf.RoundToInt((size - 1) / 2), i], rail);
-        }
-        */
+        }        
     }
 
 
@@ -72,7 +66,6 @@ public class Grid : MonoBehaviour
                 Random.Range(0, size - margin)];
 
             //Kolla så att de inte hamnar på firzonen
-
             if(obstacleOriginTile.coords.x + obstaclesSize - 1 > size/2 - obstacleFreeZone && obstacleOriginTile.coords.x < size / 2 + obstacleFreeZone &&
                obstacleOriginTile.coords.y < obstacleFreeZone)
             {
@@ -107,11 +100,8 @@ public class Grid : MonoBehaviour
             {
                 Debug.LogWarning("N/A obstacle size: " + obstaclesSize);
             }
-
         }
     }
-
-
 
     bool ObstacleInArea(Vector2Int origin, int obstaclesSize)
     {

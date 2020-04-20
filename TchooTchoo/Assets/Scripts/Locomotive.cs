@@ -5,22 +5,42 @@ public class Locomotive : MonoBehaviour
 {
     public Grid grid;
     public IntVariable score;
+    public Manager manager;
 
     Tile lastTile;
     Tile currentTile;
 
-    readonly float moveTime = 5;
+    float speed;
+    float normalSpeed = 5;
+    float endgameSpeed = 45;
+    
 
     void Start()
     {
-        score.RuntimeValue = 0;
+        SetupTrain();
+    }
 
+
+    void SetupTrain()
+    {
         lastTile = grid.homeTile;
         currentTile = grid.startTile;
         Vector2Int inDirection = lastTile.coords - currentTile.coords;
         transform.transform.position = currentTile.transform.position + new Vector3(inDirection.x, 0, inDirection.y) * 0.5f;
+    }
 
+    public void StartGame()
+    {
+        manager.StartGame();
+        SetupTrain();
+        score.RuntimeValue = 0;
+        speed = normalSpeed;
         StartCoroutine(Loop());
+    }
+
+    public void EndGame()
+    {
+        speed = endgameSpeed;
     }
 
     IEnumerator Loop()
@@ -42,8 +62,8 @@ public class Locomotive : MonoBehaviour
             }
             else
             {
-                //Game end
-                gameObject.SetActive(false);
+                manager.GameOver();
+                break;
             }
         }
     }
@@ -67,28 +87,28 @@ public class Locomotive : MonoBehaviour
             Debug.LogWarning("!!!!");
         }
 
-        float f = 0; 
-        while(f < moveTime)
+        Vector3 startPosition = currentTile.transform.position + new Vector3(inDirection.x, 0, inDirection.y) * 0.5f;
+        Vector3 targetPosition = currentTile.transform.position + new Vector3(outDirection.x, 0, outDirection.y) * 0.5f;
+        Vector3 rotationPoint = currentTile.transform.position + new Vector3(inDirection.x, 0, inDirection.y) * 0.5f +
+                    new Vector3(outDirection.x, 0, outDirection.y) * 0.5f;
+
+
+        while (Vector3.Distance(transform.position, targetPosition) > 0.02f)
         {
             if(Math.ParallellOrOpposite(new Vector3(inDirection.x,0,inDirection.y), new Vector3(outDirection.x, 0, outDirection.y)))
             {
-                transform.position = Vector3.Lerp(currentTile.transform.position + new Vector3(inDirection.x, 0, inDirection.y) * 0.5f,
-                    currentTile.transform.position + new Vector3(outDirection.x, 0, outDirection.y) * 0.5f, f / moveTime);
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * 0.1f * speed);
             }
             else
             {
                 int sign = Mathf.RoundToInt(Mathf.Sign(Vector2.SignedAngle(inDirection, outDirection)));
-
-                Vector3 point = currentTile.transform.position + new Vector3(inDirection.x, 0, inDirection.y) * 0.5f +
-                    new Vector3(outDirection.x, 0, outDirection.y) * 0.5f;
-                transform.RotateAround(point, Vector3.up, 90 * 0.01f/3 * sign);
+                transform.RotateAround(rotationPoint, Vector3.up, speed * Time.deltaTime * 10 * sign);  
             }
 
-            f += Time.deltaTime;
-            yield return new WaitForSeconds(0.01f);
+            yield return null;
         }
 
-        transform.position = currentTile.transform.position + new Vector3(outDirection.x, 0, outDirection.y) * 0.5f; //new Vector3(outDirection.x, 0, outDirection.y) * 0.5f;
+        transform.position = currentTile.transform.position + new Vector3(outDirection.x, 0, outDirection.y) * 0.5f;
         transform.rotation = Quaternion.LookRotation(new Vector3(outDirection.x, 0, outDirection.y), Vector3.up);
     }
 

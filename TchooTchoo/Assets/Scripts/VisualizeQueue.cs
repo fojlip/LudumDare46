@@ -25,7 +25,14 @@ public class VisualizeQueue : MonoBehaviour
             Rail rail = railQueue.queue.ElementAt(i);
             GameObject clone = Instantiate(prefab_railIcon, transform);
             Sprite sprite = Resources.Load<Sprite>("Rails/Pictures/" + rail.type.ToString());
-            clone.GetComponent<Image>().sprite = sprite;
+            Image image = clone.GetComponent<Image>();
+            image.sprite = sprite;
+
+            if(i == 0)
+            {
+                clone.GetComponent<RectTransform>().sizeDelta = new Vector2(150, 150);
+                //image.
+            }
         }
     }
 
